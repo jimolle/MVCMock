@@ -21,9 +21,9 @@ namespace MVCMock.Controllers
             return View();
         }
 
-        public ActionResult Contact(string message)
+        public ActionResult Contact(string msg)
         {
-            ViewBag.Message = message;
+            ViewBag.Message = msg;
 
             return View();
         }
@@ -32,9 +32,10 @@ namespace MVCMock.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Contact(ContactMessage cm)
         {
-            string message = cm.Message;
+            //HARD-CORE-WAY to clear.
+            //ModelState.Clear();
 
-            return RedirectToAction("Contact", new {message = message});
+            return RedirectToAction("Contact", new {msg = cm.Message});
         }
     }
 }
