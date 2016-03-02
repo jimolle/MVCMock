@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MVCMock.Models;
 
 namespace MVCMock.Controllers
 {
@@ -20,11 +21,20 @@ namespace MVCMock.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Contact(string message)
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = message;
 
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Contact(ContactMessage cm)
+        {
+            string message = cm.Message;
+
+            return RedirectToAction("Contact", new {message = message});
         }
     }
 }
