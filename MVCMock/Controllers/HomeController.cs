@@ -16,7 +16,7 @@ namespace MVCMock.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "DENNA SKA VI INTE HA!!!!";
+            ViewBag.Message = "Never used...";
 
             return View();
         }
