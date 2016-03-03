@@ -1,8 +1,11 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity.ModelConfiguration.Conventions.Sets;
+
 
 namespace MVCMock.Models
 {
@@ -18,16 +21,27 @@ namespace MVCMock.Models
         }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ShipContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+        public ShipContext()
+            : base("ShippingDB", throwIfV1Schema: false)
         {
+            Database.SetInitializer<ShipContext>(new DropCreateDatabaseIfModelChanges<ShipContext>());
         }
 
-        public static ApplicationDbContext Create()
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            return new ApplicationDbContext();
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
+
+        public static ShipContext Create()
+        {
+            return new ShipContext();
+        }
+
+        public DbSet<Ship> Ships { get; set; }
+        public DbSet<ShippingCompany> ShippingCompanies { get; set; }
+        public DbSet<ShipType> ShipTypes { get; set; }
     }
 }

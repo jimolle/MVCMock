@@ -9,10 +9,10 @@
     @Html.AntiForgeryToken()
 
     <h4>Contact us!</h4>
-    if (ViewBag.Message != null)
+    if (ViewBag.Msg != null)
     {
         <p>Thanks for your message:</p>
-        <p><em>@ViewBag.Message</em></p>
+        <p><em>@ViewBag.Msg</em></p>
     }
     <br />
 
