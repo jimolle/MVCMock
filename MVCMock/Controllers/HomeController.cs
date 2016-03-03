@@ -16,7 +16,7 @@ namespace MVCMock.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "DENNA SKA VI INTE HA!!!!";
 
             return View();
         }

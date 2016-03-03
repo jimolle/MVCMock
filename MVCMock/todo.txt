@@ -1,3 +1,0 @@
-﻿Set up a datacontext
-Create EF from models
-Scaffold a page for albums
