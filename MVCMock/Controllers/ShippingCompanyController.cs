@@ -6,6 +6,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVCMock.Models;
+using System.Data.Entity.Infrastructure;
 
 namespace MVCMock.Controllers
 {
@@ -71,7 +72,7 @@ namespace MVCMock.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            catch
+            catch (RetryLimitExceededException)
             {
                 ModelState.AddModelError("", "Unable to save changes...");
             }
@@ -107,7 +108,7 @@ namespace MVCMock.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            catch
+            catch (RetryLimitExceededException)
             {
                 ModelState.AddModelError("", "Unable to save changes...");
             }
@@ -141,7 +142,7 @@ namespace MVCMock.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
+            catch (RetryLimitExceededException)
             {
                 ModelState.AddModelError("", "Unable to save changes...");
                 return View();
