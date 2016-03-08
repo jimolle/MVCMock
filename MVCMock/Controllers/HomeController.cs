@@ -11,7 +11,15 @@ namespace MVCMock.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            ShipContext db = new ShipContext();
+
+            var cookie = Request.Cookies["sentMsg"];
+            if (cookie != null)
+            {
+                ViewBag.CookieMsg = cookie["key1"];
+            }
+
+            return View(db.ShippingCompanies.ToList());
         }
 
         public ActionResult About()
@@ -34,6 +42,12 @@ namespace MVCMock.Controllers
         {
 
             TempData["msg"] = cm.Message;
+
+
+            var cookie = new HttpCookie("sentMsg");
+            cookie["key1"] = cm.Message;
+            cookie.Expires = DateTime.Now.AddDays(30);
+            Response.Cookies.Add(cookie);
 
             //ViewBag.Msg = cm.Message;
             //ModelState.Clear();

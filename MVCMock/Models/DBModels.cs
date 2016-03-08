@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace MVCMock.Models
 {
+    [Table("Ship")]
     public class Ship
     {
         public int ID { get; set; }
@@ -23,6 +25,8 @@ namespace MVCMock.Models
         public int ID { get; set; }
         [Required]
         public string Name { get; set; }
+
+        public virtual ICollection<Ship> CompanyShips { get; set; } 
     }
 
     public class ShipType
@@ -31,6 +35,7 @@ namespace MVCMock.Models
         [Required]
         public string Name { get; set; }
 
-        //public virtual IQueryable<Ship> Ships { get; set; } 
+        public virtual IQueryable<Ship> Ships { get; set; }
     }
+
 }
